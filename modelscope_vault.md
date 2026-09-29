@@ -58,6 +58,9 @@
 - **orcarouter/** uncensored GGUFs (Qwen3.8-27B, GLM-5.3-Flash) — community mirrors for local use.
 - **unsloth/Qwen3.6-27B-MTP-GGUF** — GGUF for local.
 
+### Decision / System-1 Models (new — was missing)
+- **laya** (Convai Innovations / convaiinnovations) — 421M ModernBERT-large (EN) + 322M mmBERT-base (100+ langs) + typed-decisions variant. Non-autoregressive: returns typed answers (choice/score/noul) with calibrated probabilities in a single ~33ms forward pass. No text generation → no hallucination. Apache 2.0. Beats closed Jev on latency (7.8x) and calibration (ECE 0.081 vs 0.246). Router auto-dispatches by language. `convaiinnovations/laya` (+ `-multilingual`, `-typed-decisions`). HF + ModelScope. Great complement to NeoHorse-Jev-4B for agent routing/guardrails. Sept 24 2026.
+
 ## 2. Core Tooling (ModelScope-native, Chinese-devped) — MUST SCRAPE
 - **ms-swift** (modelscope/ms-swift) — v4.5.3 (Sept 7 2026). Train/infer 600+ LLMs + 300+ MLLMs. Megatron-SWIFT, GRPO family (DAPO/GSPO/SAPO/CISPO/RLOO), vLLM/SGLang/LMDeploy export. Day-0 for DeepSeek-V4.1-Flash, Qwen3.8-Flash-Next, Kimi-K3, GLM-5.2.
 - **FunASR** (modelscope/FunASR) — v1.4.16 (Sept 18). 170x realtime SenseVoice, speaker diarization, emotion, OpenAI-compatible API, vLLM engine. 20.5k stars. CPU faster than Whisper-on-GPU.
@@ -79,7 +82,7 @@
 - [ ] Clone/pull specific model cards via `modelscope` CLI or snapshot_download. Set `MODELSCOPE_ENDPOINT=https://www.modelscope.cn/api/v1` if the default stalls.
 - [ ] Spin up ms-swift SFT on a distill (e.g. Merkyor Qwen3.6-27B) for a niche task.
 - [ ] Benchmark FunASR vs Whisper on your audio.
-- [ ] Try NeoHorse-Jev-4B for agent routing.
+- [ ] Try NeoHorse-Jev-4B + laya for agent routing (decision + typed guardrails).
 - [ ] Explore DiffSynth-Music + Qwen-Image-2.1 pipeline.
 - [ ] Verify MiniMax-M3 + GLM-5.3-Flash licenses before any commercial use.
 
